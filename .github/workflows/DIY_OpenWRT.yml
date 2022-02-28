@@ -13,7 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Debugging with tmate
+      - name: 部署环境
+        run: |
+          curl -s https://build-scripts.immortalwrt.eu.org/init_build_environment.sh | sudo bash
+      - name: 克隆代码
+        run: |
+          git clone -b openwrt-21.02 --single-branch https://github.com/immortalwrt/immortalwrt
+      - name: feeds 相关
+        run: |
+          ./scripts/feeds update -a && ./scripts/feeds install -a
+      - name: ssh 连接
         uses: mxschmitt/action-tmate@v3.11
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
         timeout-minutes: 180
