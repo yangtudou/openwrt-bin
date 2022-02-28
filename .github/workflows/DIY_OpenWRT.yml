@@ -16,4 +16,4 @@ jobs:
       - name: Debugging with tmate
         uses: mxschmitt/action-tmate@v3.11
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
-        timeout-minutes: 15
+        timeout-minutes: 180
