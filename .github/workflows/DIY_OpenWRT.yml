@@ -19,11 +19,6 @@ jobs:
       - name: 克隆仓库
         run: |
           git clone -b openwrt-21.02 --single-branch https://github.com/immortalwrt/immortalwrt
-      - name: feeds 相关
-        run: |
-          cd cd immortalwrt
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
       - name: ssh 连接
         uses: mxschmitt/action-tmate@v3.11
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
